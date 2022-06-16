@@ -1,0 +1,17 @@
+<form [formGroup]="postForm" class="form">
+    <div class="form-group">
+        <label for="Topic" class="label">Temat posta:</label>
+        <input type="text" name="Topic" formControlName="Topic" class="form-control">
+
+        <label for="Content" class="label">Zawartość posta:</label>
+        <input type="text" name="Content" formControlName="Content" class="form-control">
+
+        <label for="Src" class="label">Dodaj obrazek:</label>
+        <input type="text" name="Src" formControlName="Src" class="form-control">
+
+        <!--label for="UserId" class="label">Id użytkownika:</label>
+        <input type="text" name="UserId" formControlName="UserId" class="form-control"-->
+
+        <button type="submit" (click)="onSubmit()">Dodaj publiczny post</button>
+    </div>
+</form>

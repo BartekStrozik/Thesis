@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="header">
+    <nav>
+      <ul>
+        <li class="list-item-logo" routerLinkActive="active">
+          <a routerLink="/" class="">
+            <img class="logo" src="" alt="ISOHELPER" />
+          </a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/add-post" class="">Dodaj post</a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/sign-up" class="">Zarejstruj się</a>
+        </li>
+        <li class="option" (click)="logout()" routerLinkActive="active">
+          <a href="" class="">Wyloguj się</a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/sign-in" class="">Zaloguj się</a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/comments" class="">Komentarze</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="content">
+    <div class="left-panel">
+      
+    </div>
+    <div class="wall">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="right-panel">
+      
+    </div>
+  </div>
+
+  <div class="footer">
+
+  </div>
+</div>

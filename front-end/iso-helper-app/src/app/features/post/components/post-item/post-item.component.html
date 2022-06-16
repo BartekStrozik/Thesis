@@ -1,0 +1,23 @@
+<div class="post-card card">
+   
+    <div class="card-body">
+        <div *ngIf="this.ownerExists" class="user-data">
+            <img src="{{ postOwner.src }}" alt="" class="avatar mat-elevation-z8">
+            <h2 class="post-owner">{{ postOwner.firstName }} {{ postOwner.lastName }}</h2>
+        </div>
+        <mat-divider></mat-divider>
+        <h2 class="card-title" style="font-weight: bolder;">
+            {{ post.Topic }}
+        </h2>
+        <p class="card-text topic-content">
+            {{ post.Content }}
+        </p>
+        <a>
+            <img src="{{ post.Src }}" width="300" height="300">
+        </a>
+    </div>
+    <button (click)="onDelete()">Delete!</button>
+</div>
+<!--div class="comment-section">
+    <app-comments [postId]="post.Id" [display]="false"></app-comments>
+</div-->
