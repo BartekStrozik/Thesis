@@ -1,0 +1,27 @@
+[
+  {
+    "Id": "31",
+    "Topic": "Spacery z psem",
+    "Content": "Mam malego psa, którego musze wyprowadzac na spacer",
+    "Src": "assets/images/pies.jpg",
+    "UserId": "12"
+  },
+  {
+    "Id": "33",
+    "Topic": "Wyprowadzanie suczki na spacer",
+    "Content": "Mam mala suczke rasy shitsu, która potrzebuje wychodzic na spacer 3 razy w ciagu dnia. Potrzebuje pomocy, poniewaz przebywam na kwarantannie i nie mam jak zaspokojac psia potrzbe",
+    "Src": "assets/images/pies.jpg"
+  },
+  {
+    "Id": "34",
+    "Topic": "Samotnosc",
+    "Content": "Jestem samotna starsza Pania, która potrzebuje przyjaciól z otoczenia. Zapraszam do mnie na kawke lub herbatke oraz mila rozmowe",
+    "Src": null
+  },
+  {
+    "Id": "35",
+    "Topic": "Leki dla starszego Pana",
+    "Content": "Potrzebuje PILNIE pomocy, mój ojciec (lat 74) jest chory i potrzbuje lekarstw. Jestem na kwarantannie i nie mam jak mu pomóc z lekami",
+    "Src": null
+  }
+]
