@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AuthenticationModule } from '@core/authentication/authentication.module';
 import { PostModule } from '@features/post/post.module';
+import { CommentsModule } from '@features/comments/comments.module';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { PostModule } from '@features/post/post.module';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    PostModule
+    AuthenticationModule,
+    PostModule,
+    CommentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

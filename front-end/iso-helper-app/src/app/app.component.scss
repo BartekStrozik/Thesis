@@ -17,6 +17,10 @@ nav {
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
 }
 
+nav.user-menu-nav {
+    background: white;
+}
+
 .logo {
     width: 330px;
     height: 70px;
@@ -61,7 +65,7 @@ ul li a:hover {
     z-index: 20;
 }
 
-.medium-container {
+.content {
     position: relative;
     top: 75px;
     width: 1350px;
@@ -76,7 +80,7 @@ ul li a:hover {
     left: 0;
     width: 250px;
     height: 500px;
-    background: rgb(107, 19, 10);
+    //background: rgb(107, 19, 10);
     position: fixed;
 }
 
@@ -94,11 +98,11 @@ ul li a:hover {
 .left-panel ul {
     display: flex;
     flex-direction: column;
-    background: rgb(107, 19, 10);
+    //background: rgb(107, 19, 10);
 }
 
 .left-panel ul li {
-    background: rgb(107, 19, 10);
+    //background: rgb(107, 19, 10);
 }
 
 .left-panel ul li a {

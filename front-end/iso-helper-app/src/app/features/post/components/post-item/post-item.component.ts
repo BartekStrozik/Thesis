@@ -4,6 +4,7 @@ import { User } from '@core/authentication/models/user.model'
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 import { Post } from '@features/post/models/post.model';
 import { PostService } from '@features/post/services/post.service';
+import { CommentsComponent } from '@features/comments/components/comments/comments.component';
 
 @Component({
   selector: 'app-post-item',
@@ -33,7 +34,6 @@ export class PostItemComponent implements OnInit {
       this.postService.getPostOwner(this.post.UserId).subscribe(postOwner => {
         this.postOwner = postOwner;
       });
-      console.log(this.postOwner);
     }
   }
 

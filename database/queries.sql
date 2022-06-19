@@ -69,3 +69,8 @@ CREATE TABLE Comment(
     userId int,
     createdAt varchar(200),
 )
+
+SELECT C.id, C.body, C.postId, C.username, C.userId, C.createdAt
+                   FROM dbo.Comment C
+                   JOIN dbo.Post P ON C.postId = P.Id
+                   WHERE C.postId = '" + id + @"' AND P.UserId = '" + userId + @"'

@@ -1,0 +1,15 @@
+<div class="comments">
+    <h3 *ngIf="!this.display" class="comments-title">Comments</h3>
+    <div *ngIf="!this.display" class="comment-form-title">Write comment</div>
+    <app-comment-form
+        *ngIf="!this.display"
+        submitLabel="Write"
+        [postId]="postId"
+        (handleSubmit)="addComment($event)"></app-comment-form>
+    <div *ngIf="this.display" class="comments-container">
+        <app-comment 
+            *ngFor="let comment of comments"
+            [comment]="comment">
+        </app-comment>
+    </div>
+</div>

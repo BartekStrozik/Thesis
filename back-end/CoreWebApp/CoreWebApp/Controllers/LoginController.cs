@@ -28,6 +28,11 @@ namespace CoreWebApp.Controllers
     {
         private IConfiguration _config;
         private string connectionString;
+        private static SymmetricSecurityKey mySecurityKey = new SymmetricSecurityKey(
+            Encoding.ASCII.GetBytes(
+                "$ff#amb%o90#22^&(B^CHA^#)!*539qx8d02x9&Et$ff#amb%o90#22^&(B^CHA^#)!*539qx8d02x9&Et$ff#amb%o90#22^&(B^CHA^#)!*539qx8d02x9&Et"
+                )
+            );
         public LoginController(IConfiguration config)
         {
             _config = config;
@@ -86,11 +91,58 @@ namespace CoreWebApp.Controllers
             JToken docElement = data["DocumentElement"];
 
             if (docElement.ToString() == "") return null;
-            
+
+            docElement["Users"]["token"] = GenerateToken(docElement["Users"]["id"].ToString());
+
             return docElement["Users"];
 
         }
 
+        private string GenerateToken(string userId)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[] {
+                    //new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                    new Claim("user-id", userId.ToString())
+                }),
+                Issuer = "http://mysite.com",
+                Audience = "http://myaudience.com",
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        public static bool ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = mySecurityKey,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                }, out SecurityToken validatedToken);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static int getClaim(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
+            return int.Parse(securityToken.Claims.First(claim => claim.Type == "user-id").Value);
+        }
         private JToken GetPostList(int id)
         {
             string query = @"

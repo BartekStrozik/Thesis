@@ -9,13 +9,13 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 export class AppComponent {
   title = 'iso-helper-app';
 
-  constructor(){
-    
+  constructor(public authService: AuthenticationService){
   }
 
   ngOnInit() {
   }
 
   logout() {
+    this.authService.logout();
   }
 }

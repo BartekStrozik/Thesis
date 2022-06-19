@@ -42,12 +42,16 @@ namespace CoreWebApp.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
+            Request.Headers.TryGetValue("Authorization", out var jwt);
+            if (!LoginController.ValidateToken(jwt)) return Ok("[]");
+            int userId = LoginController.getClaim(jwt);
             try
             {
                 string query = @"
-                   SELECT id, body, postId, username, userId, createdAt
-                   FROM dbo.Comment
-                   WHERE postId = '" + id + @"'
+                   SELECT C.id, C.body, C.postId, C.username, C.userId, C.createdAt
+                   FROM dbo.Comment C
+                   JOIN dbo.Post P ON C.postId = P.Id
+                   WHERE C.postId = '" + id + @"' AND P.UserId = '" + userId + @"'
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Comment";
@@ -67,9 +71,18 @@ namespace CoreWebApp.Controllers
 
                 JObject data = JObject.Parse(jsonText);
                 JToken docElement = data["DocumentElement"];
-                string result = docElement["Comment"].ToString();
+                if (docElement.HasValues)
+                {
+                    string result = docElement["Comment"].ToString();
+                    Console.WriteLine(result);
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("[]");
+                }
 
-                return Ok(result);
+                
             }
             catch (Exception ex)
             {

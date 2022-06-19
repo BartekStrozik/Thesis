@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -13,6 +14,7 @@ import { AddPostComponent } from '@features/post/components/add-post/add-post.co
 import { PostsComponent } from '@features/post/components/posts/posts.component';
 import { PostItemComponent } from '@features/post/components/post-item/post-item.component';
 import { PostDetailsComponent } from '@features/post/components/post-details/post-details.component';
+import { CommentsModule } from '@features/comments/comments.module';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,13 @@ import { PostDetailsComponent } from '@features/post/components/post-details/pos
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    CommentsModule
   ],
   exports: [
     AddPostComponent,
