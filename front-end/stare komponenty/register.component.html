@@ -1,0 +1,17 @@
+<div class="container">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+        <div class="form-group">
+            <label for="Username" class="label">E-Mail</label>
+            <input type="text" name="Username" formControlName="Username" class="form-control">
+    
+            <label for="Password" class="label">Hasło</label>
+            <input type="text" name="Password" formControlName="Password" class="form-control">
+    
+            <button type="submit" class="btn btn-success mt-3" width="500">
+                Zarejestruj się
+            </button>
+
+            <div *ngIf="error">{{error}}</div>
+        </div>
+    </form>
+</div>

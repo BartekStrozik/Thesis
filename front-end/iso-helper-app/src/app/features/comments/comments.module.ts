@@ -6,12 +6,14 @@ import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AllCommentsComponent } from './components/all-comments/all-comments.component';
 
 @NgModule({
   declarations: [
     CommentComponent,
     CommentFormComponent,
-    CommentsComponent
+    CommentsComponent,
+    AllCommentsComponent
   ],
   imports: [
     CommonModule,

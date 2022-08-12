@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationModule } from '@core/authentication/authentication.module';
 import { PostModule } from '@features/post/post.module';
 import { CommentsModule } from '@features/comments/comments.module';
+import { LayoutModule } from '@features/layout/layout.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CommentsModule } from '@features/comments/comments.module';
     ReactiveFormsModule,
     AuthenticationModule,
     PostModule,
-    CommentsModule
+    CommentsModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,20 +10,25 @@ import { CommentsService } from '@features/comments/services/comments.service';
 })
 export class CommentsComponent implements OnInit {
   @Input() postId!: number;
-  display: boolean = false;
+  @Input() display!: boolean;
 
   comments: CommentsInterface[] = [];
 
   constructor(private commentsService: CommentsService) { }
 
   ngOnInit(): void {
+    this.getComments();
+  }
+
+  getComments() {
     this.commentsService.getCommentsForPost(this.postId).subscribe(comments => {
-      console.log("==========================")
-      console.log(comments);
-      console.log("==========================")
       this.comments = comments;
-      this.display = this.comments.length > 0;
+      if(this.comments.length == 0) this.display = false;
     })
+
+    //this.commentsService.getComments().subscribe(comments => {
+    //  this.comments = comments;
+    //})
   }
 
   addComment(comment: CommentsInterface): void {

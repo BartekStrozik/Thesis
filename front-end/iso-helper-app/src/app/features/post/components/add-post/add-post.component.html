@@ -1,4 +1,4 @@
-<form [formGroup]="postForm" class="form">
+<!--form [formGroup]="postForm" class="form">
     <div class="form-group">
         <label for="Topic" class="label">Temat posta:</label>
         <input type="text" name="Topic" formControlName="Topic" class="form-control">
@@ -9,9 +9,54 @@
         <label for="Src" class="label">Dodaj obrazek:</label>
         <input type="text" name="Src" formControlName="Src" class="form-control">
 
-        <!--label for="UserId" class="label">Id użytkownika:</label>
-        <input type="text" name="UserId" formControlName="UserId" class="form-control"-->
+        <label for="UserId" class="label">Id użytkownika:</label>
+        <input type="text" name="UserId" formControlName="UserId" class="form-control">
 
         <button type="submit" (click)="onSubmit()">Dodaj publiczny post</button>
     </div>
-</form>
+</form-->
+
+<div class="container">
+    <form [formGroup]="postForm" class="space-y-6" action="#" method="POST">
+        <div class="form-group">
+            <div>
+                <label for="Topic" class="block text-sm font-medium text-gray-700">
+                    Temat posta:
+                </label>
+                <div class="mt-1">
+                    <input name="Topic" type="Topic" formControlName="Topic" autocomplete="Topic" required
+                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="Content" class="block text-sm font-medium text-gray-700">
+                    Zawartość posta:
+                </label>
+                <div class="mt-1">
+                    <input name="Content" type="Content" formControlName="Content" autocomplete="Content" required
+                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="Src" class="block text-sm font-medium text-gray-700">
+                    Dodaj obrazek:
+                </label>
+                <div class="mt-1">
+                    <input name="Src" type="Src" formControlName="Src" autocomplete="Src" required
+                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <button
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+                    type="submit" 
+                    (click)="onSubmit()"
+                    >Dodaj publiczny post
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

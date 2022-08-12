@@ -71,10 +71,15 @@ namespace CoreWebApp.Controllers
 
                 JObject data = JObject.Parse(jsonText);
                 JToken docElement = data["DocumentElement"];
+                if(table.Rows.Count == 1)
+                {
+                    string result = "[" + docElement["Comment"].ToString() + "]";
+                    return Ok(result);
+                }
                 if (docElement.HasValues)
                 {
                     string result = docElement["Comment"].ToString();
-                    Console.WriteLine(result);
+                    //Console.WriteLine(result);
                     return Ok(result);
                 }
                 else

@@ -13,6 +13,8 @@ import { CommentsComponent } from '@features/comments/components/comments/commen
 })
 export class PostItemComponent implements OnInit {
   @Input() post!: Post;
+  @Input() displayComments!: boolean;
+
   currentUser!: User;
   ownerExists!: boolean;
   postOwner!: User;

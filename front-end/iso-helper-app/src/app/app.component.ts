@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
+import { CommentsInterface } from '@features/comments/models/comments.interafce';
+import { CommentsService } from '@features/comments/services/comments.service';
 
 @Component({
   selector: 'app-root',

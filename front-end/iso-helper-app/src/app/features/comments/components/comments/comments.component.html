@@ -1,5 +1,5 @@
 <div class="comments">
-    <h3 *ngIf="!this.display" class="comments-title">Comments</h3>
+    <h3 *ngIf="this.display" class="comments-title">Comments</h3>
     <div *ngIf="!this.display" class="comment-form-title">Write comment</div>
     <app-comment-form
         *ngIf="!this.display"

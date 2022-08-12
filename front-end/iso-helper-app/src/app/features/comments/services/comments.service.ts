@@ -30,12 +30,11 @@ export class CommentsService {
     console.log(token);
     let newHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': token.toString()
+      'Authorization': token
     })
     const newHttpOptions = {
       headers: newHeaders
     } 
-    console.log(httpOptions);
     return this.http.get<CommentsInterface[]>(url, newHttpOptions);
   }
 
