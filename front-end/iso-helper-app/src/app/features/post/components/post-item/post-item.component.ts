@@ -31,17 +31,17 @@ export class PostItemComponent implements OnInit {
     this.ownerExists = false;
     this.postOwner = new User;
     this.authService.currentUser.subscribe(x => this.currentUser = x);
-    if(this.post.UserId > 0){
+    if(this.post.userId > 0){
       this.ownerExists = true;
-      this.postService.getPostOwner(this.post.UserId).subscribe(postOwner => {
+      this.postService.getPostOwner(this.post.userId).subscribe(postOwner => {
         this.postOwner = postOwner;
       });
     }
   }
 
   onDelete() {
-    this.postService.deletePost(this.post.Id).subscribe();
-    console.log(this.post.Id);
+    this.postService.deletePost(this.post.id).subscribe();
+    console.log(this.post.id);
     //window.location.reload();
   }
 }

@@ -1,15 +1,19 @@
 export class Post {
-    Id: number;
-    Topic: string;
-    Content: string;
-    Src: string;
-    UserId: number;
+    id: number;
+    topic: string;
+    content: string;
+    src: string;
+    userId: number;
+    place: string;
+    date: string;
 
-    constructor(Id: number, Topic: string, Content: string, Src: string, UserId: number) {
-        this.Id = Id;
-        this.Topic = Topic;
-        this.Content = Content;
-        this.Src = Src;
-        this.UserId = UserId;
+    constructor(id: number, topic: string, content: string, src: string, userId: number, place: string, date: string) {
+        this.id = id;
+        this.topic = topic;
+        this.content = content;
+        this.src = src;
+        this.userId = userId;
+        this.place = place;
+        this.date = date;
     }
 }

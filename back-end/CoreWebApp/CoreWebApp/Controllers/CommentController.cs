@@ -50,36 +50,22 @@ namespace CoreWebApp.Controllers
                 string query = @"
                    SELECT C.id, C.body, C.postId, C.username, C.userId, C.createdAt
                    FROM dbo.Comment C
-                   JOIN dbo.Post P ON C.postId = P.Id
-                   WHERE C.postId = '" + id + @"' AND P.UserId = '" + userId + @"'
+                   JOIN dbo.Post P ON C.postId = P.id
+                   WHERE C.postId = '" + id + @"' AND P.userId = '" + userId + @"'
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Comment";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-                var xmlStr = ConvertDatatableToXML(table);
-
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xmlStr);
-                string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-                JObject data = JObject.Parse(jsonText);
-                JToken docElement = data["DocumentElement"];
-                if(table.Rows.Count == 1)
+                JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
+                if (table.Rows.Count == 1)
                 {
                     string result = "[" + docElement["Comment"].ToString() + "]";
                     return Ok(result);
                 }
-                if (docElement.HasValues)
+                else if (docElement.HasValues)
                 {
                     string result = docElement["Comment"].ToString();
-                    //Console.WriteLine(result);
                     return Ok(result);
                 }
                 else
@@ -91,7 +77,7 @@ namespace CoreWebApp.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message); // this can be something like 
+                return BadRequest(ex.Message);
             }
         }
 
@@ -107,29 +93,14 @@ namespace CoreWebApp.Controllers
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Comment";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-                var xmlStr = ConvertDatatableToXML(table);
-
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xmlStr);
-                string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-                JObject data = JObject.Parse(jsonText);
-                JToken docElement = data["DocumentElement"];
-                string result = docElement["Comment"].ToString();
-
-                return Ok(result);
+                JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
+                return Ok(docElement["Comment"].ToString());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message); // this can be something like 
+                return BadRequest(ex.Message); 
             }
         }
 
@@ -151,13 +122,7 @@ namespace CoreWebApp.Controllers
 
                 DataTable table = new DataTable();
                 table.TableName = "Comment";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 var message = "Added!!";
                 return Ok(message);

@@ -9,6 +9,7 @@ import { AccountComponent } from '@features/layout/components/account/account.co
 import { PostListComponent } from '@features/layout/components/post-list/post-list.component';
 import { AllCommentsComponent } from '@features/comments/components/all-comments/all-comments.component';
 import { PersonalsChangeComponent } from '@features/layout/components/personals-change/personals-change.component';
+import { ChatPanelComponent } from '@features/chat/components/chat-panel/chat-panel.component';
 
 const routes: Routes = [
   { path: '', component: PostsComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent},
   { path: 'post-list', component: PostListComponent},
   { path: 'personals-change', component: PersonalsChangeComponent},
+  { path: 'chat', component: ChatPanelComponent},
   { path: 'comments', component: AllCommentsComponent}
 ];
 

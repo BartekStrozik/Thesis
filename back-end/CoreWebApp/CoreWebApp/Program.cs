@@ -22,5 +22,6 @@ namespace CoreWebApp
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }

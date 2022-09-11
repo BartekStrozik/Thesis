@@ -83,7 +83,7 @@ ul li a:hover {
 
 .wall {
     grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column-end: 4;
 }
 
 .left-panel-title {
@@ -110,11 +110,9 @@ ul li a:hover {
     border-top: 1px solid rgba(255, 255, 255, .1);
 }
 
-.right-panel {
+/*.right-panel {
     grid-column-start: 3;
     grid-column-end: 4;
     right: 0;
-    width: 200px;
-    height: 500px;
     position: fixed;
-}
+}*/

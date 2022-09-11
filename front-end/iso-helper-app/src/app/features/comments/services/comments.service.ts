@@ -27,7 +27,6 @@ export class CommentsService {
     var currentUser = localStorage.getItem('currentUser');
     var token = "";
     if(currentUser != null) token = JSON.parse(currentUser)['token'];
-    console.log(token);
     let newHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': token

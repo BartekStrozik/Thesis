@@ -21,17 +21,27 @@
 <div class="flex-1 p-4 space-y-2 flex flex-col">
     <div *ngIf="this.ownerExists" class="user-data">
         <img src="{{ postOwner.src }}" alt="" class="avatar mat-elevation-z8">
-        <h2 class="post-owner">{{ postOwner.firstName }} {{ postOwner.lastName }}</h2>
+        <ul class="placeholder">
+            <li class="text-gray-900">   
+                <strong>{{ postOwner.firstName }} {{ postOwner.lastName }}</strong>
+            </li>
+            <li class="text-gray-900">   
+                {{ post.place }}
+            </li>
+            <li class="text-gray-900">   
+                {{ post.date }}
+            </li>
+        </ul>
     </div>
     <h3 class="text-lg font-black text-gray-900">
-        {{ post.Topic }}
+        {{ post.topic }}
     </h3>
     <mat-divider></mat-divider>
-    <p class="text-sm text-gray-700">{{ post.Content }}</p>
+    <p class="text-sm text-gray-700">{{ post.content }}</p>
     <a>
-        <img src="{{ post.Src }}" width="500" height="400">
+        <img src="{{ post.src }}" width="500" height="400">
     </a>
 </div>
 <div class="comment-section">
-    <app-comments [postId]="post.Id" [display]="displayComments"></app-comments>
+    <app-comments [postId]="post.id" [display]="displayComments"></app-comments>
 </div>

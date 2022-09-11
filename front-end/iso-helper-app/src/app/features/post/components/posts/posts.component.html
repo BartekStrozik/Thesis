@@ -1,5 +1,15 @@
-<app-post-item
-    *ngFor="let post of posts"
-    [post]="post"
-    [displayComments]="false">
-</app-post-item>
+<div class="container">
+    <div class="wall">
+        <app-post-item 
+            *ngFor="let post of posts | topicPipe:topicFilter
+            | placePipe:placeFilter"
+            [post]="post" 
+            [displayComments]="false">
+        </app-post-item>
+    </div>
+    <div class="filters">
+        <app-filters
+            (filtersResult)="filterBy($event)">
+        </app-filters>
+    </div>
+</div>

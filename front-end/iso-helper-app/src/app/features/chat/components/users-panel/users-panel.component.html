@@ -1,0 +1,12 @@
+<div class="container">
+    <div *ngFor="let user of users">
+        <button (click)="chooseUser(user)" class="user-line">
+            <img src="{{ user.src }}" alt="">
+            <div class="name">
+                <p>{{ user.firstName }}</p>
+                <p>{{ user.lastName }}</p>
+            </div>
+        </button>
+        <mat-divider></mat-divider>
+    </div>
+</div>

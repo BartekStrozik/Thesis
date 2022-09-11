@@ -74,3 +74,42 @@ SELECT C.id, C.body, C.postId, C.username, C.userId, C.createdAt
                    FROM dbo.Comment C
                    JOIN dbo.Post P ON C.postId = P.Id
                    WHERE C.postId = '" + id + @"' AND P.UserId = '" + userId + @"'
+
+-------------------------------------------------------------------------------------------------------------
+				   
+CREATE TABLE dbo.Post(
+	id int identity(1,1),
+	topic varchar(500),
+	content varchar(1000),
+	src varchar(150),
+	userId int,
+	place varchar(100),
+	date varchar(300)
+)
+
+
+CREATE TABLE Message(
+	id int identity(1,1) PRIMARY KEY,
+    senderId int,
+	receiverId int,
+    content varchar(1200),
+    receivedAt datetime
+)
+
+
+ALTER TABLE Message
+ADD FOREIGN KEY (senderId) REFERENCES Users(id); 
+
+ALTER TABLE Message
+ADD FOREIGN KEY (receiverId) REFERENCES Users(id);
+
+INSERT INTO dbo.Message VALUES
+( 20, 21, 'siemka', '2020' ),
+( 20, 22, 'elo', '2020' ),
+( 20, 23, 'czesc', '2020' )
+
+INSERT INTO dbo.Post VALUES
+('Testowy1', 'test test test', '', 21, 'Kraków', '17 lipca 2020'),
+('Testowy2', 'test test test', '', 22, 'Lubin', '17 lipca 2020'),
+('Testowy3', 'test test test', '', 24, 'Wejherowo', '17 lipca 2020'),
+('Testowy4', 'test test test', '', 22, 'Lubin', '17 lipca 2020')

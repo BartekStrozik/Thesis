@@ -28,7 +28,7 @@ namespace CoreWebApp.Controllers
             this.connectionString = _config.GetConnectionString("DefaultConnectionString");
         }
 
-        private string ConvertDatatableToXML(DataTable dt)
+        public static string ConvertDatatableToXML(DataTable dt)
         {
             MemoryStream str = new MemoryStream();
             dt.WriteXml(str, true);
@@ -39,13 +39,14 @@ namespace CoreWebApp.Controllers
             return (xmlstr);
         }
 
+        
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Register([FromBody] UserLogin userLogin)
+        public IActionResult Register([FromBody] UserModel user)
         {
-            if (!CheckIfUserExist(userLogin.Username))
+            if (!CheckIfUserExist(user.username))
             {
-                RegisterUser(userLogin);
+                RegisterUser(user);
                 //var user = SeekUser(userLogin);
                 return Ok("User inserted!!");
             }
@@ -62,31 +63,19 @@ namespace CoreWebApp.Controllers
                 ";
             DataTable table = new DataTable();
             table.TableName = "Users";
-            using (var con = new SqlConnection(this.connectionString))
-            using (var cmd = new SqlCommand(query, con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.Text;
-                da.Fill(table);
-            }
+            table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
             return (table.Rows.Count > 0);
         }
 
-        private void RegisterUser(UserLogin userLogin)
+        private void RegisterUser(UserModel user)
         {
             string query = @"
-                    INSERT INTO dbo.Users ([username], [password])
-                    VALUES('" + userLogin.Username + @"', '" + userLogin.Password + @"')
+                    INSERT INTO dbo.Users ([username], [password], [firstName], [lastName])
+                    VALUES('" + user.username + @"', '" + user.password + @"', '" + user.firstName + @"', '" + user.lastName + @"')
                 ";
             DataTable table = new DataTable();
             table.TableName = "Users";
-            using (var con = new SqlConnection(this.connectionString))
-            using (var cmd = new SqlCommand(query, con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.Text;
-                da.Fill(table);
-            }
+            CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
         }
 
         private string SeekUser(UserLogin userLogin)

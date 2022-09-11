@@ -30,7 +30,7 @@ export class AddPostComponent implements OnInit {
   onSubmit() {
     let post: Post = this.postForm.value;
     let currentUser = this.authService.currentUserValue;
-    if(currentUser.id > 0) post.UserId = currentUser.id;
+    if(currentUser.id > 0) post.userId = currentUser.id;
     this.postService.addPost(post).subscribe();
   }
 }

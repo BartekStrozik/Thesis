@@ -1,10 +1,10 @@
 <div class="mt-5 flex-grow flex flex-col">
     <nav class="flex-1 px-2 bg-white space-y-1 user-menu-nav" aria-label="Sidebar">
-      <a href="#" class="bg-red-900 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+      <div class="bg-red-900 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
         <span class="flex-1 text-white">
           Menu użytkownika
         </span>
-      </a>
+      </div>
 
       <a routerLink="/account" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
         <!-- Heroicon name: outline/users -->
@@ -48,6 +48,18 @@
         <!-- Current: "bg-white", Default: "bg-gray-100 group-hover:bg-gray-200" -->
         <span class="text-white bg-red-900 group-hover:bg-gray-200 ml-3 inline-block py-0.5 px-3 text-xs font-medium rounded-full">
           3
+        </span>
+
+        
+      </a>
+
+      <a routerLink="/chat" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+        <!-- Heroicon name: outline/users -->
+        <svg class="text-white group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <span class="flex-1 text-white">
+          Czat
         </span>
       </a>
     </nav>

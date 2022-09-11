@@ -46,6 +46,27 @@ namespace MvCMovie.Controllers
             return (xmlstr);
         }
 
+        public JToken ConvertXMLToJToken(string xmlStr)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xmlStr);
+            string jsonText = JsonConvert.SerializeXmlNode(doc);
+            JObject data = JObject.Parse(jsonText);
+            return data["DocumentElement"];
+        }
+
+        public DataTable ExecuteQuery(string connectionString, DataTable table, string query)
+        {
+            using (var con = new SqlConnection(this.connectionString))
+            using (var cmd = new SqlCommand(query, con))
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.CommandType = CommandType.Text;
+                da.Fill(table);
+            }
+            return table;
+        }
+
         // GET: Post/id
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
@@ -53,35 +74,20 @@ namespace MvCMovie.Controllers
             try
             {
                 string query = @"
-                    SELECT Topic, Content, Src, UserId
+                    SELECT topic, content, src, userId, place, date
                     FROM dbo.Post
-                    WHERE Id = '" + id + @"'
+                    WHERE id = '" + id + @"'
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Post";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-                var xmlStr = ConvertDatatableToXML(table);
-
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xmlStr);
-                string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-                JObject data = JObject.Parse(jsonText);
-                JToken docElement = data["DocumentElement"];
-                string result = docElement["Post"].ToString();
-
-                return Ok(result);
+                JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
+                return Ok(docElement["Post"].ToString());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message); // this can be something like 
+                return BadRequest(ex.Message); 
             }
         }
 
@@ -92,34 +98,19 @@ namespace MvCMovie.Controllers
             try
             {
                 string query = @"
-                    SELECT Id, Topic, Content, Src, UserId
+                    SELECT id, topic, content, src, userId, place, date
                     FROM dbo.Post
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Post";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-                var xmlStr = ConvertDatatableToXML(table);
-
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xmlStr);
-                string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-                JObject data = JObject.Parse(jsonText);
-                JToken docElement = data["DocumentElement"];
-                string result = docElement["Post"].ToString();
-
-                return Ok(result);
+                JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
+                return Ok(docElement["Post"].ToString());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message); // this can be something like 
+                return BadRequest(ex.Message);
             }
         }
         
@@ -133,21 +124,17 @@ namespace MvCMovie.Controllers
                 
                 string query = @"
                     INSERT INTO dbo.Post VALUES
-                    ('" + post.Topic + @"',
-                    '" + post.Content + @"',
-                    '" + post.Src + @"',
-                    '" + post.UserId + @"')
+                    ('" + post.topic + @"',
+                    '" + post.content + @"',
+                    '" + post.src + @"',
+                    '" + post.userId + @"',
+                    '" + post.place + @"',
+                    '" + post.date + @"')
                 ";
 
                 DataTable table = new DataTable();
                 table.TableName = "Post";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 var message = "Added!!";
                 return Ok(message);
@@ -167,21 +154,17 @@ namespace MvCMovie.Controllers
 
                 string query = @"
                     UPDATE dbo.Post SET
-                    Topic = '" + post.Topic + @"',
-                    Content = '" + post.Content + @"',
-                    Src = '" + post.Src + @"'
-                    WHERE Id = " + post.Id + @"
+                    topic = '" + post.topic + @"',
+                    content = '" + post.content + @"',
+                    src = '" + post.src + @"',
+                    place = '" + post.place + @"',
+                    date = '" + post.date + @"'
+                    WHERE id = " + post.id + @"
                 ";
 
                 DataTable table = new DataTable();
                 table.TableName = "Post";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 var message = "Updated!!";
                 return Ok(message);
@@ -201,18 +184,12 @@ namespace MvCMovie.Controllers
 
                 string query = @"
                     DELETE FROM dbo.Post
-                    WHERE Id = '" + id + @"'
+                    WHERE id = '" + id + @"'
                 ";
 
                 DataTable table = new DataTable();
                 table.TableName = "Post";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 var message = "Deleted!!";
                 return Ok(message);
@@ -234,13 +211,7 @@ namespace MvCMovie.Controllers
                 ";
 
                 DataTable table = new DataTable();
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 var message = "Deleted All!!";
                 return Ok(message);

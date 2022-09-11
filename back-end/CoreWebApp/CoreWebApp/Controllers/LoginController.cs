@@ -56,9 +56,6 @@ namespace CoreWebApp.Controllers
         {
 
             JToken user = Authenticate(userLogin);
-            //JToken postList = GetPostList((int) user["id"]);
-            //user["postList"] = postList;
-
             if (user != null) return Ok(user.ToString());
             return NotFound("User not found!!");
         }
@@ -73,22 +70,8 @@ namespace CoreWebApp.Controllers
                 ";
             DataTable table = new DataTable();
             table.TableName = "Users";
-            using (var con = new SqlConnection(this.connectionString))
-            using (var cmd = new SqlCommand(query, con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.Text;
-                da.Fill(table);
-            }
-
-            var xmlStr = ConvertDatatableToXML(table);
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xmlStr);
-            string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-            JObject data = JObject.Parse(jsonText);
-            JToken docElement = data["DocumentElement"];
+            table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
+            JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
 
             if (docElement.ToString() == "") return null;
 
@@ -146,9 +129,9 @@ namespace CoreWebApp.Controllers
         private JToken GetPostList(int id)
         {
             string query = @"
-                    SELECT Topic, Content, Src
+                    SELECT topic, content, src
                     FROM dbo.Post
-                    WHERE UserId = '" + id + @"'
+                    WHERE userId = '" + id + @"'
                 ";
             DataTable table = new DataTable();
             table.TableName = "Posts";

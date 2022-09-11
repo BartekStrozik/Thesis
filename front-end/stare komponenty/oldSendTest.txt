@@ -1,0 +1,39 @@
+oldSendTest(){
+    var socket = new WebSocket('wss://localhost:44347/wse')
+    console.log(socket);
+
+    this.authService.currentUser.subscribe(user => this.jwt = user);
+    let token = this.jwt.token;
+
+    socket.onopen = function (event) {
+      console.log("Opened");
+      console.log(socket.readyState);
+      console.log(WebSocket.OPEN);
+      let message = {
+        "token": token,
+        "to": "bartek1@gmail.com",
+        "content": "milakowo"
+      }
+      socket.send(JSON.stringify(message));
+
+      //socket.close();
+    }
+
+    socket.onmessage = function(event) {
+      console.log(event.data.toString())
+    }
+
+    socket.onclose = function(event) {
+      console.log("Closed");
+    }
+    // socket.onmessage = function (event) {
+    //   console.log(event.data);
+    // };
+
+    // while(socket.readyState != 1){
+    //   console.log("OK");
+    // }
+
+    //socket.send("ABC");
+    console.log("ABC")
+  }

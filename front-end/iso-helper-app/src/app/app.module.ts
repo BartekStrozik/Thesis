@@ -9,7 +9,7 @@ import { AuthenticationModule } from '@core/authentication/authentication.module
 import { PostModule } from '@features/post/post.module';
 import { CommentsModule } from '@features/comments/comments.module';
 import { LayoutModule } from '@features/layout/layout.module';
-
+import { ChatModule } from '@features/chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { LayoutModule } from '@features/layout/layout.module';
     AuthenticationModule,
     PostModule,
     CommentsModule,
-    LayoutModule
+    LayoutModule,
+    ChatModule
   ],
   providers: [],
   bootstrap: [AppComponent]

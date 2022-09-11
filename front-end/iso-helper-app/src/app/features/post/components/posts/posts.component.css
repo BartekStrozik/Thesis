@@ -1,0 +1,17 @@
+.container {
+    width: 1050px;
+    display: grid;
+    grid-template-columns: 900px 150px;
+}
+
+.wall {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.filters {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 150px;
+    height: 500px;
+}

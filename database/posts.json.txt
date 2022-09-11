@@ -1,27 +1,37 @@
 [
   {
-    "Id": "31",
-    "Topic": "Spacery z psem",
-    "Content": "Mam malego psa, którego musze wyprowadzac na spacer",
-    "Src": "assets/images/pies.jpg",
-    "UserId": "12"
+    "Id": "2",
+    "Topic": "Leki dla starszego pana",
+    "Content": "Mój ojciec (lat 74) jest chory i potrzebuje medykamentów. Przyjme pomoc kogos, kto kupi i dostarczy leki, spis leków dostarcze w wiadmosci prywatnej z adresem.",
+    "Src": "assets/images/blok1.jpg",
+    "UserId": "20"
   },
   {
-    "Id": "33",
+    "Id": "4",
     "Topic": "Wyprowadzanie suczki na spacer",
     "Content": "Mam mala suczke rasy shitsu, która potrzebuje wychodzic na spacer 3 razy w ciagu dnia. Potrzebuje pomocy, poniewaz przebywam na kwarantannie i nie mam jak zaspokojac psia potrzbe",
-    "Src": "assets/images/pies.jpg"
+    "Src": "assets/images/pies.jpg",
+    "UserId": "20"
   },
   {
-    "Id": "34",
-    "Topic": "Samotnosc",
-    "Content": "Jestem samotna starsza Pania, która potrzebuje przyjaciól z otoczenia. Zapraszam do mnie na kawke lub herbatke oraz mila rozmowe",
-    "Src": null
+    "Id": "5",
+    "Topic": "Zrobienie zakupów",
+    "Content": "Jestem starsza Pania, która potrzebuje pomocy przy zrobieniu zakupów",
+    "Src": "assets/images/zakupy1.jpg",
+    "UserId": "20"
   },
   {
-    "Id": "35",
-    "Topic": "Leki dla starszego Pana",
-    "Content": "Potrzebuje PILNIE pomocy, mój ojciec (lat 74) jest chory i potrzbuje lekarstw. Jestem na kwarantannie i nie mam jak mu pomóc z lekami",
-    "Src": null
+    "Id": "6",
+    "Topic": "Odebranie dzieci ze szkoly",
+    "Content": "Jestesmy rodzicami przebywajacymi na kwarantannie. Potrzebujemy odebrac dzieci ze szkoly.",
+    "Src": "assets/images/bus.png",
+    "UserId": "20"
+  },
+  {
+    "Id": "8",
+    "Topic": "T",
+    "Content": "z",
+    "Src": "assets/images/apt.jpg",
+    "UserId": "0"
   }
 ]

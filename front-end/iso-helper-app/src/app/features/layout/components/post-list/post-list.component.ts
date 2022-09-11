@@ -30,6 +30,7 @@ export class PostListComponent implements OnInit {
   refreshPostList() {
     this.postService.getUserPosts(this.currentUser.id).subscribe(posts => {
       this.posts = posts;
+      console.log(this.posts)
     })
   }
 

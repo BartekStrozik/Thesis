@@ -37,8 +37,8 @@ export class AuthenticationService {
         this.currentUserSubject.next(new User);
     }
 
-    register(username: string, password: string) {
-        return this.http.post<User>(`https://localhost:44347/api/register`, { username, password })
+    register(username: string, password: string, firstName: string, lastName: string) {
+        return this.http.post<User>(`https://localhost:44347/api/register`, { username, password, firstName, lastName })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));

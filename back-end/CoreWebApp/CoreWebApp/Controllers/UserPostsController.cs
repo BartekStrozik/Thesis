@@ -45,35 +45,20 @@ namespace CoreWebApp.Controllers
             try
             {
                 string query = @"
-                    SELECT Id, Topic, Content, Src, UserId
+                    SELECT id, topic, content, src, userId, place, date
                     FROM dbo.Post
-                    WHERE UserId = '" + userId + @"'
+                    WHERE userId = '" + userId + @"'
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Post";
-                using (var con = new SqlConnection(this.connectionString))
-                using (var cmd = new SqlCommand(query, con))
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    da.Fill(table);
-                }
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-                var xmlStr = ConvertDatatableToXML(table);
-
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xmlStr);
-                string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-                JObject data = JObject.Parse(jsonText);
-                JToken docElement = data["DocumentElement"];
-                string result = docElement["Post"].ToString();
-
-                return Ok(result);
+                JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
+                return Ok(docElement["Post"].ToString());
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message); // this can be something like 
+                return BadRequest(ex.Message);
             }
         }
     }

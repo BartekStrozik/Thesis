@@ -6,3 +6,7 @@
     left       : 45%;
     margin-left: -250px;
 }
+
+.login-button {
+    padding: 10px;
+}

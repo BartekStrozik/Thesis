@@ -26,7 +26,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
       Username: ['', Validators.required],
-      Password: ['', Validators.required]
+      Password: ['', Validators.required],
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required]
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -38,7 +40,7 @@ export class RegisterComponent implements OnInit {
     if (this.signUpForm.invalid) {
       return;
     }
-    this.authService.register(this.f['Username'].value, this.f['Password'].value)
+    this.authService.register(this.f['Username'].value, this.f['Password'].value, this.f['FirstName'].value, this.f['LastName'].value)
       .pipe(first())
       .subscribe(
         data => {

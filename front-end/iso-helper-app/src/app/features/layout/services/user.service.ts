@@ -17,6 +17,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   
+  getAllUsers() {
+    return this.http.get<User[]>(this.apiUrl + '/User');
+  }
+
   updateUser(user: User) {
     return this.http.put(this.apiUrl + '/User', user, httpOptions);
   }

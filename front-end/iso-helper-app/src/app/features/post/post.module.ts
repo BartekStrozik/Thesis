@@ -15,13 +15,20 @@ import { PostsComponent } from '@features/post/components/posts/posts.component'
 import { PostItemComponent } from '@features/post/components/post-item/post-item.component';
 import { PostDetailsComponent } from '@features/post/components/post-details/post-details.component';
 import { CommentsModule } from '@features/comments/comments.module';
+import { FiltersModule } from '@features/filters/filters.module';
+import { TopicPipe } from '@features/filters/pipes/topic.pipe';
+import { UserPipe } from '@features/filters/pipes/user.pipe';
+import { PlacePipe } from '@features/filters/pipes/place.pipe';
 
 @NgModule({
   declarations: [
     AddPostComponent,
     PostsComponent,
     PostItemComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    TopicPipe,
+    UserPipe,
+    PlacePipe
   ],
   imports: [
     AppRoutingModule,
@@ -33,7 +40,8 @@ import { CommentsModule } from '@features/comments/comments.module';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    CommentsModule
+    CommentsModule,
+    FiltersModule
   ],
   exports: [
     AddPostComponent,
