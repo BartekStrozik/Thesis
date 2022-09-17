@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngFor="let user of users">
+    <div *ngFor="let user of users | userLastNamePipe:lastNameFilter | userPlacePipe:placeFilter">
         <button (click)="chooseUser(user)" class="user-line">
             <img src="{{ user.src }}" alt="">
             <div class="name">
@@ -10,3 +10,4 @@
         <mat-divider></mat-divider>
     </div>
 </div>
+

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { LayoutStructureComponent } from './components/layout-structure/layout-structure.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { AccountComponent } from './components/account/account.component';
 import { RouterModule } from '@angular/router';
 import { PostListComponent } from './components/post-list/post-list.component';
@@ -12,7 +12,7 @@ import { PersonalsChangeComponent } from './components/personals-change/personal
 
 @NgModule({
   declarations: [
-    LayoutStructureComponent,
+    UserMenuComponent,
     AccountComponent,
     PostListComponent,
     PersonalsChangeComponent
@@ -24,8 +24,8 @@ import { PersonalsChangeComponent } from './components/personals-change/personal
     ReactiveFormsModule
   ],
   exports: [
-    LayoutStructureComponent,
+    UserMenuComponent,
     AccountComponent
   ]
 })
-export class LayoutModule { }
+export class UserPanelModule { }

@@ -38,6 +38,7 @@ export class MessengerComponent implements OnInit {
 
   send(){
     this.messagesService.sendMessage(this.currentUser.id, this.user.id, this.inputMessage);
+    this.inputMessage = "";
     this.ngOnChanges();
   }
 

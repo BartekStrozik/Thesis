@@ -2,6 +2,13 @@
     <div id="messenger" *ngIf="chosenUser != null">
         <app-messenger [user]="chosenUser"></app-messenger>
     </div>
-    <div id="panel"><app-users-panel (chosenUser)="chooseUser($event)"></app-users-panel></div>
-    
+    <div id="panel">
+        <app-users-filters *ngIf="chosenUser != null"
+            (usersFiltersResult)="filterUsersBy($event)">
+        </app-users-filters>
+        <app-users-panel
+            [filters]="filters"
+            (chosenUser)="chooseUser($event)">
+        </app-users-panel>
+    </div>
 </div>

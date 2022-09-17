@@ -65,15 +65,27 @@ namespace CoreWebApp.Controllers
                 string query = @"
                     SELECT id, username, firstName, lastName, src
                     FROM dbo.Users
+                    ORDER BY firstName, lastName
                 ";
                 DataTable table = new DataTable();
                 table.TableName = "Users";
                 table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
-                string result = docElement["Users"].ToString();
-
-                return Ok(result);
+                if (table.Rows.Count == 1)
+                {
+                    string result = "[" + docElement["Users"].ToString() + "]";
+                    return Ok(result);
+                }
+                else if (docElement.HasValues)
+                {
+                    string result = docElement["Users"].ToString();
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("[]");
+                }
             }
             catch (Exception ex)
             {

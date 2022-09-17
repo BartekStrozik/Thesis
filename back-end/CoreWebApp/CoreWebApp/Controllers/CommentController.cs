@@ -96,7 +96,20 @@ namespace CoreWebApp.Controllers
                 table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
-                return Ok(docElement["Comment"].ToString());
+                if (table.Rows.Count == 1)
+                {
+                    string result = "[" + docElement["Comment"].ToString() + "]";
+                    return Ok(result);
+                }
+                else if (docElement.HasValues)
+                {
+                    string result = docElement["Comment"].ToString();
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("[]");
+                }
             }
             catch (Exception ex)
             {

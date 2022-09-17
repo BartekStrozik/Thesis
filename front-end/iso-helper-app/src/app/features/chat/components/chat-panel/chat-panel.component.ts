@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@core/authentication/models/user.model';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
+import { UsersFilters } from '@features/chat/models/users-filters.model';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -13,8 +14,11 @@ import { Subject } from 'rxjs';
 })
 export class ChatPanelComponent implements OnInit {
   chosenUser!: User;
-  //chosenUser: Subject<User> = new Subject<User>();
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
+  filters: UsersFilters = {
+    "lastName": "",
+    "place": ""
+  }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -23,9 +27,11 @@ export class ChatPanelComponent implements OnInit {
   }
 
   chooseUser(user: User) {
-    //this.clearMessenger();
-    //this.chosenUser.next(user);
     this.chosenUser = user;
+  }
+
+  filterUsersBy(filters: UsersFilters) {
+    this.filters = filters;
   }
 
   clearMessenger() {

@@ -83,7 +83,20 @@ namespace MvCMovie.Controllers
                 table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
-                return Ok(docElement["Post"].ToString());
+                if (table.Rows.Count == 1)
+                {
+                    string result = "[" + docElement["Post"].ToString() + "]";
+                    return Ok(result);
+                }
+                else if (docElement.HasValues)
+                {
+                    string result = docElement["Post"].ToString();
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("[]");
+                }
             }
             catch (Exception ex)
             {
@@ -106,7 +119,20 @@ namespace MvCMovie.Controllers
                 table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
-                return Ok(docElement["Post"].ToString());
+                if (table.Rows.Count == 1)
+                {
+                    string result = "[" + docElement["Post"].ToString() + "]";
+                    return Ok(result);
+                }
+                else if (docElement.HasValues)
+                {
+                    string result = docElement["Post"].ToString();
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok("[]");
+                }
             }
             catch (Exception ex)
             {

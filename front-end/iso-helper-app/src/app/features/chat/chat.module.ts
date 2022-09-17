@@ -6,19 +6,26 @@ import { MessengerComponent } from './components/messenger/messenger.component';
 import { MessageComponent } from './components/message/message.component';
 
 import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsersFiltersComponent } from './components/users-filters/users-filters.component';
+import { UserLastNamePipe } from './pipes/userLastName.pipe';
+import { UserPlacePipe } from './pipes/userPlace.pipe';
 
 @NgModule({
   declarations: [
     ChatPanelComponent,
     UsersPanelComponent,
     MessengerComponent,
-    MessageComponent
+    MessageComponent,
+    UsersFiltersComponent,
+    UserLastNamePipe,
+    UserPlacePipe
   ],
   imports: [
     CommonModule,
     MatDividerModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ChatPanelComponent

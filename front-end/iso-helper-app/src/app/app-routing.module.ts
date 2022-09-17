@@ -5,10 +5,10 @@ import { PostDetailsComponent } from '@features/post/components/post-details/pos
 import { AddPostComponent } from '@features/post/components/add-post/add-post.component';
 import { LoginComponent } from '@core/authentication/components/login/login.component';
 import { RegisterComponent } from '@core/authentication/components/register/register.component';
-import { AccountComponent } from '@features/layout/components/account/account.component';
-import { PostListComponent } from '@features/layout/components/post-list/post-list.component';
+import { AccountComponent } from '@features/user-panel/components/account/account.component';
+import { PostListComponent } from '@features/user-panel/components/post-list/post-list.component';
 import { AllCommentsComponent } from '@features/comments/components/all-comments/all-comments.component';
-import { PersonalsChangeComponent } from '@features/layout/components/personals-change/personals-change.component';
+import { PersonalsChangeComponent } from '@features/user-panel/components/personals-change/personals-change.component';
 import { ChatPanelComponent } from '@features/chat/components/chat-panel/chat-panel.component';
 
 const routes: Routes = [

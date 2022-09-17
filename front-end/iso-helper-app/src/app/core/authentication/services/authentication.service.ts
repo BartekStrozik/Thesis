@@ -23,8 +23,6 @@ export class AuthenticationService {
     login(username: string, password: string) {
         return this.http.post<User>(`https://localhost:44347/api/login`, { username, password })
             .pipe(map(user => {
-                console.log(user);
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
@@ -40,7 +38,6 @@ export class AuthenticationService {
     register(username: string, password: string, firstName: string, lastName: string) {
         return this.http.post<User>(`https://localhost:44347/api/register`, { username, password, firstName, lastName })
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;

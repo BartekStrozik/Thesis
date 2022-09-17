@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@core/authentication/models/user.model';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
-import { UserService } from '@features/layout/services/user.service';
+import { UserService } from '@features/user-panel/services/user.service';
 
 @Component({
   selector: 'app-personals-change',
