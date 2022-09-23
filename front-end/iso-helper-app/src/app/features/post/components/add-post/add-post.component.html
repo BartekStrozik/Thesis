@@ -23,6 +23,16 @@
                 <h1>Dodaj publiczny post</h1>
             </div>
             <div>
+                <label for="Place" class="block text-sm font-medium text-gray-700">
+                    Lokalizacja:
+                </label>
+                <div class="mt-1">
+                    <input name="Place" type="Place" formControlName="Place" autocomplete="Place" required
+                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
                 <label for="Topic" class="block text-sm font-medium text-gray-700">
                     Temat posta:
                 </label>
@@ -43,12 +53,12 @@
             </div>
 
             <div>
-                <label for="Src" class="block text-sm font-medium text-gray-700">
+                <label class="block text-sm font-medium text-gray-700">
                     Dodaj obrazek:
                 </label>
-                <div class="mt-1">
-                    <input name="Src" type="Src" formControlName="Src" autocomplete="Src" required
-                        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <div class="mt-1 source-image">
+                    <input type="file"
+                    #file required (change)="onFileSelected($event)">
                 </div>
             </div>
 

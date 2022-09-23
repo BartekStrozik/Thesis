@@ -1,3 +1,13 @@
 .add-button {
     padding: 10px;
 }
+
+.source-image{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.message-progress {
+    padding: 15px;
+}

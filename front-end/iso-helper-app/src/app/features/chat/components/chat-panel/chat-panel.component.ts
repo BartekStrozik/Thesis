@@ -16,15 +16,14 @@ export class ChatPanelComponent implements OnInit {
   chosenUser!: User;
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
   filters: UsersFilters = {
+    "firstName": "",
     "lastName": "",
-    "place": ""
-  }
+    "place": "",
+  };
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   chooseUser(user: User) {
     this.chosenUser = user;

@@ -37,8 +37,17 @@ export class PostService {
     return this.http.get<User>(url);
   }
 
-  addPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(this.apiUrl + '/Post', post, httpOptions);
+  getAllUserIds(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + '/User/all');
+  }
+
+  getUserIds(firstName: string, lastName: string): Observable<User[]>{
+    const url = `${this.apiUrl}/User/${firstName}/${lastName}`;
+    return this.http.get<User[]>(url);
+  }
+
+  addPost(post: Post) {
+    return this.http.post(this.apiUrl + '/Post', post, httpOptions);
   }
   
   updatePost(post: Post) {

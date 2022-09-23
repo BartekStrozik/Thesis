@@ -15,5 +15,6 @@ namespace CoreWebApp.Models
         public string lastName { get; set; }
         public string token { get; set; }
         public string src { get; set; }
+        public string place { get; set; }
     }
 }

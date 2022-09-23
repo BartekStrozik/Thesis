@@ -38,3 +38,15 @@ CREATE TABLE dbo.Post(
 	date varchar(300)
 )
 
+--UPLOAD
+
+CREATE TABLE dbo.Post(
+	id int identity(1,1),
+	topic varchar(500),
+	content varchar(1000),
+	src varbinary(max),
+	userId int,
+	place varchar(100),
+	date varchar(300)
+)
+

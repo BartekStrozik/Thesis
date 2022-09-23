@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersFiltersComponent } from './components/users-filters/users-filters.component';
 import { UserLastNamePipe } from './pipes/userLastName.pipe';
 import { UserPlacePipe } from './pipes/userPlace.pipe';
+import { UserFirstNamePipe } from './pipes/userFirstName.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UserPlacePipe } from './pipes/userPlace.pipe';
     MessengerComponent,
     MessageComponent,
     UsersFiltersComponent,
+    UserFirstNamePipe,
     UserLastNamePipe,
     UserPlacePipe
   ],

@@ -21,6 +21,11 @@ export class UserService {
     return this.http.get<User[]>(this.apiUrl + '/User');
   }
 
+  getUserData(userId: number) {
+    const url = `${this.apiUrl}/User/${userId}`;
+    return this.http.get<User>(url)
+  }
+
   updateUser(user: User) {
     return this.http.put(this.apiUrl + '/User', user, httpOptions);
   }

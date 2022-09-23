@@ -10,6 +10,7 @@ import { UserService } from '@features/user-panel/services/user.service';
 })
 export class UsersPanelComponent implements OnInit {
   @Input() filters!: UsersFilters;
+  firstNameFilter: string = "";
   lastNameFilter: string = "";
   placeFilter: string = "";
 
@@ -23,13 +24,24 @@ export class UsersPanelComponent implements OnInit {
       this.users = users;
     })
 
+    this.firstNameFilter = this.filters.firstName;
     this.lastNameFilter = this.filters.lastName;
     this.placeFilter = this.filters.place;
   }
 
   ngOnChanges() {
+    this.userService.getAllUsers().subscribe(users => {
+      this.users = users;
+    })
+    
+    console.log(this.filters)
+    this.firstNameFilter = this.filters.firstName;
     this.lastNameFilter = this.filters.lastName;
     this.placeFilter = this.filters.place;
+  }
+
+  createImagePath(src: string){
+    return `https://localhost:44347/${src}`;
   }
 
   chooseUser(user: User){

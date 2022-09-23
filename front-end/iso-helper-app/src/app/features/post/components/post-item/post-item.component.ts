@@ -5,6 +5,7 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 import { Post } from '@features/post/models/post.model';
 import { PostService } from '@features/post/services/post.service';
 import { CommentsComponent } from '@features/comments/components/comments/comments.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-item',
@@ -13,7 +14,9 @@ import { CommentsComponent } from '@features/comments/components/comments/commen
 })
 export class PostItemComponent implements OnInit {
   @Input() post!: Post;
-  @Input() displayComments!: boolean;
+  @Input() displayComments: boolean = true;
+
+  sourceImage!: string;
 
   currentUser!: User;
   ownerExists!: boolean;
@@ -22,7 +25,8 @@ export class PostItemComponent implements OnInit {
   constructor(
     private router: Router,
     private postService: PostService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private http: HttpClient
     ) {
 
   }
@@ -36,7 +40,11 @@ export class PostItemComponent implements OnInit {
       this.postService.getPostOwner(this.post.userId).subscribe(postOwner => {
         this.postOwner = postOwner;
       });
-    }
+    }    
+  }
+
+  createImagePath(src: string){
+    return `https://localhost:44347/${src}`
   }
 
   onDelete() {

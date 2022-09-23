@@ -19,6 +19,7 @@ using System.IO;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace MvCMovie.Controllers
 {
@@ -147,7 +148,13 @@ namespace MvCMovie.Controllers
         {
             try
             {
-                
+                //var file = Request.Form.Files[0];
+                //var folderName = Path.Combine("Resources", "Images");
+                //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                ///var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                //var fullPath = Path.Combine(pathToSave, fileName);
+
                 string query = @"
                     INSERT INTO dbo.Post VALUES
                     ('" + post.topic + @"',
@@ -162,8 +169,9 @@ namespace MvCMovie.Controllers
                 table.TableName = "Post";
                 CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-                var message = "Added!!";
-                return Ok(message);
+                //Console.WriteLine(table.Rows.Find("id"));
+                //var message = "Added!!";
+                return Ok("A");
             }
             catch (Exception ex)
             {

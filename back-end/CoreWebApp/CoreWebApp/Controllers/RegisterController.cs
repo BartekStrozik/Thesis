@@ -70,8 +70,8 @@ namespace CoreWebApp.Controllers
         private void RegisterUser(UserModel user)
         {
             string query = @"
-                    INSERT INTO dbo.Users ([username], [password], [firstName], [lastName])
-                    VALUES('" + user.username + @"', '" + user.password + @"', '" + user.firstName + @"', '" + user.lastName + @"')
+                    INSERT INTO dbo.Users ([username], [password], [firstName], [lastName], [src])
+                    VALUES('" + user.username + @"', '" + user.password + @"', '" + user.firstName + @"', '" + user.lastName + @"', '" + user.src + @"')
                 ";
             DataTable table = new DataTable();
             table.TableName = "Users";

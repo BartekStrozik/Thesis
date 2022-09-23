@@ -1,3 +1,4 @@
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,11 +17,15 @@ export class PersonalsChangeComponent implements OnInit {
 
   currentUser!: User;
 
+  selectedFile!: File;
+  uploadFinished!: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute, private router: Router,
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private http: HttpClient
     ) { }
 
   ngOnInit(): void {
@@ -38,6 +43,10 @@ export class PersonalsChangeComponent implements OnInit {
 
   get f() { return this.personals.controls; }
 
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
   onChange() {
     if (this.personals.invalid) {
       return;
@@ -49,8 +58,16 @@ export class PersonalsChangeComponent implements OnInit {
     let user: User = this.authService.currentUserValue;
     user.firstName = this.f['FirstName'].value;
     user.lastName = this.f['LastName'].value;
-    user.src = '';
-    this.userService.updateUser(user).subscribe();
-
+    
+    const filedata = new FormData();
+    filedata.append('image', this.selectedFile, this.selectedFile.name);
+    this.http.post('https://localhost:44347/api/Upload', filedata, { observe: 'events' })
+      .subscribe(event => {
+        if (event.type === HttpEventType.Response){
+          this.uploadFinished = event.body;
+          user.src = this.uploadFinished.dbPath;
+          this.userService.updateUser(user).subscribe();
+        }
+      })
   }
 }

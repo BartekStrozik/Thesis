@@ -1,7 +1,8 @@
 <div class="container">
-    <div *ngFor="let user of users | userLastNamePipe:lastNameFilter | userPlacePipe:placeFilter">
+    <div *ngFor="let user of users | userFirstNamePipe:firstNameFilter
+        | userLastNamePipe:lastNameFilter | userPlacePipe:placeFilter">
         <button (click)="chooseUser(user)" class="user-line">
-            <img src="{{ user.src }}" alt="">
+            <img [src]="createImagePath(user.src)" alt="">
             <div class="name">
                 <p>{{ user.firstName }}</p>
                 <p>{{ user.lastName }}</p>

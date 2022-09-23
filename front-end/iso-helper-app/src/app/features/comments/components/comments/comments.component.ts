@@ -11,6 +11,7 @@ import { CommentsService } from '@features/comments/services/comments.service';
 export class CommentsComponent implements OnInit {
   @Input() postId!: number;
   @Input() display!: boolean;
+  displayForm!: boolean;
 
   comments: CommentsInterface[] = [];
 
@@ -18,6 +19,11 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getComments();
+    this.displayForm = !this.display;
+  }
+
+  ngOnChanges(){
+    this.displayForm = !this.display;
   }
 
   getComments() {

@@ -36,6 +36,10 @@ export class MessengerComponent implements OnInit {
     });
   }
 
+  createImagePath(src: string){
+    return `https://localhost:44347/${src}`;
+  }
+
   send(){
     this.messagesService.sendMessage(this.currentUser.id, this.user.id, this.inputMessage);
     this.inputMessage = "";

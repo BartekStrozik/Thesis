@@ -6,4 +6,5 @@ export class User {
     lastName!: string;
     token?: string;
     src!: string;
+    place!: string;
 }

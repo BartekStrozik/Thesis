@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -17,9 +18,13 @@ export class RegisterComponent implements OnInit {
   returnUrl?: string;
   error = '';
 
+  selectedFile!: File;
+  uploadFinished!: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute, private router: Router,
+    private http: HttpClient,
     private authService: AuthenticationService) {
   }
 
@@ -36,20 +41,34 @@ export class RegisterComponent implements OnInit {
 
   get f() { return this.signUpForm.controls; }
 
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
   onSignUp() {
     if (this.signUpForm.invalid) {
       return;
     }
-    this.authService.register(this.f['Username'].value, this.f['Password'].value, this.f['FirstName'].value, this.f['LastName'].value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = 'User with given username already exists!!!!';
-          this.loading = false;
-        });;
-      this.router.navigate(['/']);
+
+    const filedata = new FormData();
+    filedata.append('image', this.selectedFile, this.selectedFile.name);
+    this.http.post('https://localhost:44347/api/Upload', filedata, { observe: 'events' })
+      .subscribe(event => {
+        if (event.type === HttpEventType.Response) {
+          this.uploadFinished = event.body;
+
+          this.authService.register(this.f['Username'].value, this.f['Password'].value, this.f['FirstName'].value, this.f['LastName'].value, this.uploadFinished.dbPath)
+            .pipe(first())
+            .subscribe(
+              data => {
+                this.router.navigate([this.returnUrl]);
+              },
+              error => {
+                this.error = 'User with given username already exists!!!!';
+                this.loading = false;
+              });;
+          this.router.navigate(['/']);
+        }
+      });
   }
 }

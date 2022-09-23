@@ -11,8 +11,9 @@ export class UsersFiltersComponent implements OnInit {
   @Output() usersFiltersResult: EventEmitter<UsersFilters> = new EventEmitter();
 
   filtersForm = new FormGroup({
-    LastName: new FormControl(),
-    Place: new FormControl()
+    FirstName: new FormControl(""),
+    LastName: new FormControl(""),
+    Place: new FormControl("")
   })
 
   constructor() { }
@@ -22,6 +23,7 @@ export class UsersFiltersComponent implements OnInit {
 
   onSubmit() {
     let filtersObject: UsersFilters = {
+      "firstName": this.filtersForm.value.FirstName,
       "lastName": this.filtersForm.value.LastName,
       "place": this.filtersForm.value.Place,
     }

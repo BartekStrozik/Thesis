@@ -1,6 +1,6 @@
 <div class="container">
     <div class="user-line">
-        <img src="{{ user.src }}" alt="">
+        <img [src]="createImagePath(user.src)" alt="">
         <div class="name">
             <p>{{ user.firstName }}</p>
             <p>{{ user.lastName }}</p>

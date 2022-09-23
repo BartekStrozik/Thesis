@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    <nav>
+    <nav class="text-gray-900">
       <ul>
         <li class="option" routerLinkActive="active">
           <a routerLink="/" class="">
@@ -27,7 +27,7 @@
   </div>
   <div class="content">
     <div *ngIf="this.authService.currentUserValue.id" class="left-panel">
-      <app-user-menu></app-user-menu>>
+      <app-user-menu></app-user-menu>
     </div>
     <div class="wall">
       <router-outlet></router-outlet>

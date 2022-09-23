@@ -5,6 +5,6 @@ import { User } from "@core/authentication/models/user.model";
 export class UserPlacePipe implements PipeTransform{
     transform (users: User[], place: string): User[]{
         if(place == "") return users;
-        return users.filter(user => user.id > 0);
+        return users.filter(user => user.place == place);
     }
 }

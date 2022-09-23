@@ -20,10 +20,10 @@
 </div-->
 <div class="flex-1 p-4 space-y-2 flex flex-col">
     <div *ngIf="this.ownerExists" class="user-data">
-        <img src="{{ postOwner.src }}" alt="" class="avatar mat-elevation-z8">
+        <img [src]="createImagePath(postOwner.src)" alt="" class="avatar mat-elevation-z8">
         <ul class="placeholder">
-            <li class="text-gray-900">   
-                <strong>{{ postOwner.firstName }} {{ postOwner.lastName }}</strong>
+            <li class="font-black text-gray-900">   
+                {{ postOwner.firstName }} {{ postOwner.lastName }}
             </li>
             <li class="text-gray-900">   
                 {{ post.place }}
@@ -39,7 +39,7 @@
     <mat-divider></mat-divider>
     <p class="text-sm text-gray-700">{{ post.content }}</p>
     <a>
-        <img src="{{ post.src }}" width="500" height="400">
+        <img [src]="createImagePath(post.src)" width="500" height="400">
     </a>
 </div>
 <div class="comment-section">

@@ -113,3 +113,13 @@ INSERT INTO dbo.Post VALUES
 ('Testowy2', 'test test test', '', 22, 'Lubin', '17 lipca 2020'),
 ('Testowy3', 'test test test', '', 24, 'Wejherowo', '17 lipca 2020'),
 ('Testowy4', 'test test test', '', 22, 'Lubin', '17 lipca 2020')
+
+--Upload Image
+
+INSERT INTO dbo.Blob
+VALUES
+(dbo.FILE_READ('C:\Users\barte\OneDrive\Desktop\Projekt Inżynierski\projekt\back-end\CoreWebApp\CoreWebApp\Resources\Images\dworzec.jpg')
+
+INSERT INTO dbo.Blob
+SELECT BulkColumn
+FROM OPENROWSET(Bulk 'C:\Users\barte\OneDrive\Desktop\Projekt Inżynierski\projekt\back-end\CoreWebApp\CoreWebApp\Resources\Images\dworzec.jpg', SINGLE_BLOB) AS BLOB
