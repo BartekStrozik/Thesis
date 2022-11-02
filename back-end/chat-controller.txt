@@ -1,0 +1,4 @@
+//int to = this.GetUserId(request["to"].ToString());
+//string content = request["content"].ToString();
+//int from = LoginController.getClaim(request["token"].ToString());
+//string date = DateTime.Now.ToString();

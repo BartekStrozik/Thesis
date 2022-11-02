@@ -123,3 +123,9 @@ VALUES
 INSERT INTO dbo.Blob
 SELECT BulkColumn
 FROM OPENROWSET(Bulk 'C:\Users\barte\OneDrive\Desktop\Projekt Inżynierski\projekt\back-end\CoreWebApp\CoreWebApp\Resources\Images\dworzec.jpg', SINGLE_BLOB) AS BLOB
+
+--Zapytanie do listy czatu
+
+SELECT DISTINCT
+FROM dbo.Friends
+WHERE 

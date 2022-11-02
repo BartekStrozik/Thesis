@@ -1,3 +1,6 @@
+.container {
+}
+
 .post-card {
     display: flex;
     justify-content: center;
@@ -26,6 +29,7 @@ a {
 }
 
 .placeholder {
+    max-width: 200px;
     position: relative;
     left: 40px;
     top: 20px;
@@ -36,4 +40,15 @@ a {
 
 .placeholder li {
     font-size: large;
+}
+
+#go-to-chat {
+    max-width: 200px;
+    position: relative;
+    left: 280px;
+    top: 20px;
+}
+
+.divider {
+    padding: 25px;
 }

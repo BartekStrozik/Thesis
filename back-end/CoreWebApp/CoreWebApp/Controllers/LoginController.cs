@@ -64,7 +64,7 @@ namespace CoreWebApp.Controllers
         private JToken Authenticate(UserLogin userLogin)
         {
             string query = @"
-                    SELECT id, username, firstName, lastName, token
+                    SELECT id, username, firstName, lastName, token, src
                     FROM dbo.Users
                     WHERE username = '" + userLogin.Username + @"' AND password = '" + userLogin.Password + @"'
                 ";

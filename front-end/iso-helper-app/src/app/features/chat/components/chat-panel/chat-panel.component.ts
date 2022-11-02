@@ -1,10 +1,11 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Injectable } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@core/authentication/models/user.model';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 import { UsersFilters } from '@features/chat/models/users-filters.model';
+import { UserService } from '@features/user-panel/services/user.service';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./chat-panel.component.scss']
 })
 export class ChatPanelComponent implements OnInit {
+  userId!: string;
   chosenUser!: User;
   resetFormSubject: Subject<boolean> = new Subject<boolean>();
   filters: UsersFilters = {
@@ -21,9 +23,25 @@ export class ChatPanelComponent implements OnInit {
     "place": "",
   };
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(paramMap => {
+      let userIdString = paramMap.get('userId');
+      if(userIdString != null){
+        this.userService.getUserData(Number(userIdString)).subscribe(user => this.chosenUser = user);
+      }
+    });
+  }
+
+  ngOnChanges(): void {
+    this.route.paramMap.subscribe(paramMap => {
+      let userIdString = paramMap.get('userId');
+      if(userIdString != null){
+        this.userService.getUserData(Number(userIdString)).subscribe(user => this.chosenUser = user);
+      }
+    });
+  }
 
   chooseUser(user: User) {
     this.chosenUser = user;

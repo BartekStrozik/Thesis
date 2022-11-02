@@ -1,5 +1,12 @@
-.add-button {
-    padding: 10px;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group {
+    min-width: 1000px;
 }
 
 .source-image{

@@ -1,0 +1,24 @@
+<div class="container">
+    <img [src]="createImagePath(notification.sourceUserSrc)" alt="">
+    <!--span>
+        {{ notification.id }}
+        {{ notification.ownerId }}
+        {{ notification.isNewMessage }}
+        {{ notification.isNewComment }}
+        {{ notification.isNewInvite }}
+    </span-->
+    <div class="content">
+        <span class="notification-content">
+            Użytkownik {{ notification.sourceFirstName }} {{ notification.sourceLastName }}
+        </span>
+        <span class="notification-content" *ngIf="this.notification.isNewMessage == 1">
+            wysłał Ci wiadomość
+        </span>
+        <span class="notification-content" *ngIf="this.notification.isNewComment == 1">
+            skomentował Twój post
+        </span>
+        <span class="notification-content" *ngIf="this.notification.isNewInvite == 1">
+            zaprasza Cię do znajomych
+        </span>
+    </div>
+</div>

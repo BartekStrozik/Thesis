@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
@@ -11,6 +11,8 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
+
   signInForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.loggedIn.emit(true);
           this.router.navigate(['/account']);
         },
         error => {

@@ -31,7 +31,8 @@ export class PersonalsChangeComponent implements OnInit {
   ngOnInit(): void {
     this.personals = this.formBuilder.group({
       FirstName: [],
-      LastName: []
+      LastName: [],
+      Place: []
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -56,8 +57,9 @@ export class PersonalsChangeComponent implements OnInit {
     this.getUser();
 
     let user: User = this.authService.currentUserValue;
-    user.firstName = this.f['FirstName'].value;
-    user.lastName = this.f['LastName'].value;
+    if(this.f['FirstName'] !=null ) user.firstName = this.f['FirstName'].value;
+    if(this.f['LastName'] !=null ) user.lastName = this.f['LastName'].value;
+    if(this.f['Place'] !=null ) user.place = this.f['Place'].value;
     
     const filedata = new FormData();
     filedata.append('image', this.selectedFile, this.selectedFile.name);
@@ -67,6 +69,7 @@ export class PersonalsChangeComponent implements OnInit {
           this.uploadFinished = event.body;
           user.src = this.uploadFinished.dbPath;
           this.userService.updateUser(user).subscribe();
+          this.router.navigate(['/account']);
         }
       })
   }

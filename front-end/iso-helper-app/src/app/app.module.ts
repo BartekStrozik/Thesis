@@ -10,6 +10,7 @@ import { PostModule } from '@features/post/post.module';
 import { CommentsModule } from '@features/comments/comments.module';
 import { UserPanelModule } from '@features/user-panel/user-panel.module';
 import { ChatModule } from '@features/chat/chat.module';
+import { PagesModule } from '@pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ChatModule } from '@features/chat/chat.module';
     PostModule,
     CommentsModule,
     UserPanelModule,
-    ChatModule
+    ChatModule,
+    PagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

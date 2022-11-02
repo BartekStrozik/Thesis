@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
@@ -12,6 +12,8 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @Output() registered: EventEmitter<boolean> = new EventEmitter();
+
   signUpForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -67,7 +69,7 @@ export class RegisterComponent implements OnInit {
                 this.error = 'User with given username already exists!!!!';
                 this.loading = false;
               });;
-          this.router.navigate(['/']);
+          this.registered.emit(true);
         }
       });
   }

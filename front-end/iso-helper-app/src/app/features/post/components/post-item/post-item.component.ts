@@ -49,7 +49,5 @@ export class PostItemComponent implements OnInit {
 
   onDelete() {
     this.postService.deletePost(this.post.id).subscribe();
-    console.log(this.post.id);
-    //window.location.reload();
   }
 }

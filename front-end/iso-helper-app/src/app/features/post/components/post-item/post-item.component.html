@@ -1,47 +1,41 @@
-<!--div class="post-card card">
-   
-    <div class="card-body">
+<div class="container">
+    <button (click)="onDelete()">Delete!</button>
+    <div class="flex-1 p-4 space-y-2 flex flex-col">
         <div *ngIf="this.ownerExists" class="user-data">
-            <img src="{{ postOwner.src }}" alt="" class="avatar mat-elevation-z8">
-            <h2 class="post-owner">{{ postOwner.firstName }} {{ postOwner.lastName }}</h2>
+            <a routerLink="/profile/{{post.userId}}">
+                <img [src]="createImagePath(postOwner.src)" alt="" class="avatar mat-elevation-z8">
+            </a>
+            <ul class="placeholder">
+                <li class="font-black text-gray-900">
+                    {{ postOwner.firstName }} {{ postOwner.lastName }}
+                </li>
+                <li class="text-gray-900">
+                    {{ post.place }}
+                </li>
+                <li class="text-gray-900">
+                    {{ post.date | date:'medium' }}
+                </li>
+            </ul>
+            <div id="go-to-chat">
+                <button class="w-200 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <a routerLink="/chat/{{post.userId}}">
+                        Napisz do {{ postOwner.firstName }} {{ postOwner.lastName }}
+                    </a>
+                </button>
+            </div>
         </div>
+        <h3 class="text-lg font-black text-gray-900">
+            {{ post.topic }}
+        </h3>
         <mat-divider></mat-divider>
-        <h2 class="card-title" style="font-weight: bolder;">
-            {{ post.Topic }}
-        </h2>
-        <p class="card-text topic-content">
-            {{ post.Content }}
-        </p>
-        <a>
-            <img src="{{ post.Src }}" width="300" height="300">
+        <p class="text-sm text-gray-700">{{ post.content }}</p>
+        <a routerLink="/posts/{{post.id}}">
+            <img [src]="createImagePath(post.src)" width="500" height="400">
         </a>
     </div>
-    <button (click)="onDelete()">Delete!</button>
-</div-->
-<div class="flex-1 p-4 space-y-2 flex flex-col">
-    <div *ngIf="this.ownerExists" class="user-data">
-        <img [src]="createImagePath(postOwner.src)" alt="" class="avatar mat-elevation-z8">
-        <ul class="placeholder">
-            <li class="font-black text-gray-900">   
-                {{ postOwner.firstName }} {{ postOwner.lastName }}
-            </li>
-            <li class="text-gray-900">   
-                {{ post.place }}
-            </li>
-            <li class="text-gray-900">   
-                {{ post.date }}
-            </li>
-        </ul>
+    <div class="divider"><mat-divider></mat-divider></div>
+    <div class="comment-section">
+        <app-comments [postId]="post.id" [display]="displayComments"></app-comments>
     </div>
-    <h3 class="text-lg font-black text-gray-900">
-        {{ post.topic }}
-    </h3>
-    <mat-divider></mat-divider>
-    <p class="text-sm text-gray-700">{{ post.content }}</p>
-    <a>
-        <img [src]="createImagePath(post.src)" width="500" height="400">
-    </a>
-</div>
-<div class="comment-section">
-    <app-comments [postId]="post.id" [display]="displayComments"></app-comments>
+    <div class="divider"><mat-divider></mat-divider></div>
 </div>

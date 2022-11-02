@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostModule } from '@features/post/post.module';
 import { PersonalsChangeComponent } from './components/personals-change/personals-change.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationItemComponent } from './components/notification-item/notification-item.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { PersonalsChangeComponent } from './components/personals-change/personal
     UserMenuComponent,
     AccountComponent,
     PostListComponent,
-    PersonalsChangeComponent
+    PersonalsChangeComponent,
+    NotificationsComponent,
+    NotificationItemComponent
   ],
   imports: [
     CommonModule,

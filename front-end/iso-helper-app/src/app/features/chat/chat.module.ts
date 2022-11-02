@@ -11,6 +11,7 @@ import { UsersFiltersComponent } from './components/users-filters/users-filters.
 import { UserLastNamePipe } from './pipes/userLastName.pipe';
 import { UserPlacePipe } from './pipes/userPlace.pipe';
 import { UserFirstNamePipe } from './pipes/userFirstName.pipe';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserFirstNamePipe } from './pipes/userFirstName.pipe';
     UsersFiltersComponent,
     UserFirstNamePipe,
     UserLastNamePipe,
-    UserPlacePipe
+    UserPlacePipe,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

@@ -1,43 +1,12 @@
-<div class="container">
-  <div class="header">
-    <nav class="text-gray-900">
-      <ul>
-        <li class="option" routerLinkActive="active">
-          <a routerLink="/" class="">
-            <img class="logo" src="assets/images/isohelper.png" width="100" height="100" alt="Isohelper" />
-          </a>
-        </li>
-        <li class="option" routerLinkActive="active">
-          <a routerLink="/add-post" class="">Dodaj post</a>
-        </li>
-        <li *ngIf="!this.authService.currentUserValue.id" class="option" routerLinkActive="active">
-          <a routerLink="/sign-up" class="">Zarejstruj się</a>
-        </li>
-        <li *ngIf="this.authService.currentUserValue.id" class="option" (click)="logout()" routerLinkActive="active">
-          <a href="" class="">Wyloguj się</a>
-        </li>
-        <li *ngIf="!this.authService.currentUserValue.id" class="option" routerLinkActive="active">
-          <a routerLink="/sign-in" class="">Zaloguj się</a>
-        </li>
-        <li class="option" routerLinkActive="active">
-          <a routerLink="/comments" class="">Komentarze</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="content">
-    <div *ngIf="this.authService.currentUserValue.id" class="left-panel">
-      <app-user-menu></app-user-menu>
-    </div>
-    <div class="wall">
-      <router-outlet></router-outlet>
-    </div>
-    <!--div class="right-panel">
-      <app-filters></app-filters>
-    </div-->
-  </div>
-
-  <div class="footer">
-
-  </div>
+<div *ngIf="this.displayBase">
+    <app-base (option)="authStart($event)"></app-base>
+</div>
+<div *ngIf="this.loginChosen" class="login">
+    <app-login (loggedIn)="displayMain($event)"></app-login>
+</div>
+<div *ngIf="this.registerChosen" class="register">
+    <app-register (registered)="backToBase($event)"></app-register>
+</div>
+<div *ngIf="this.isAuthenticated">
+    <app-main (logoutClick)="backToBase($event)"></app-main>
 </div>

@@ -2,6 +2,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 import { Post } from '@features/post/models/post.model';
 import { PostService } from '@features/post/services/post.service';
@@ -24,7 +25,8 @@ export class AddPostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private http: HttpClient,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private route: ActivatedRoute, private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -54,10 +56,16 @@ export class AddPostComponent implements OnInit {
         if (event.type === HttpEventType.Response){
           this.uploadFinished = event.body;
           post.src = this.uploadFinished.dbPath;
+          
+          post.date = Date.now().toString();
 
           let currentUser = this.authService.currentUserValue;
-          if (currentUser.id > 0) post.userId = currentUser.id;
+          if (currentUser.id > 0) {
+            post.userId = currentUser.id;
+            post.place = currentUser.place;
+          }
           this.postService.addPost(post).subscribe();
+          this.router.navigate(['/']);
         }
     });
   }

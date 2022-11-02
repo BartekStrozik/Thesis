@@ -18,21 +18,15 @@
         </span>
       </a>
 
-      <a routerLink="/post-list" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-        <span class="flex-1 text-white">
-          Historia postów
-        </span>
-      </a>
-
-      <a href="#" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+      <a routerLink="/notifications" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
         <span class="flex-1 text-white">
           Powiadomienia
         </span>
       </a>
 
-      <a routerLink="/chat" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-        <span class="flex-1 text-white">
-          Czat
+      <a routerLink="/" class="bg-red-700 text-gray-600 hover:bg-red-900 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+        <span (click)="logout()" class="flex-1 text-white">
+          Wyloguj się
         </span>
       </a>
     </nav>

@@ -1,0 +1,35 @@
+<div id="container">
+  <div class="header">
+    <nav class="text-gray-900">
+      <ul>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/wall" class="">
+            <img class="logo" src="assets/images/isohelper.png" width="100" height="100" alt="Isohelper" />
+          </a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/add-post" class="">Dodaj post</a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/post-list" class="">Historia postów</a>
+        </li>
+        <li class="option" routerLinkActive="active">
+          <a routerLink="/chat" class="">Czatuj z użytkownikami</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="content">
+    <div class="left-panel">
+      <app-user-menu (logoutClick)="emitLogout($event)"></app-user-menu>
+    </div>
+    <div class="wall">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <!--div class="footer">
+    Lorem ipsum et doloret bartek strozik
+  </div-->
+</div>

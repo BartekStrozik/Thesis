@@ -29,24 +29,60 @@ CREATE TABLE Users(
 
 
 CREATE TABLE dbo.Post(
-	id int identity(1,1),
+	id int identity(1,1) PRIMARY KEY,
 	topic varchar(500),
 	content varchar(1000),
-	src varchar(150),
+	src varchar(1000),
 	userId int,
 	place varchar(100),
 	date varchar(300)
 )
 
---UPLOAD
 
-CREATE TABLE dbo.Post(
-	id int identity(1,1),
-	topic varchar(500),
-	content varchar(1000),
-	src varbinary(max),
+--FOREIGN KEYS
+
+ALTER TABLE dbo.Post
+ADD FOREIGN KEY (userId) REFERENCES dbo.Users(id)
+
+ALTER TABLE dbo.Comment
+ADD FOREIGN KEY (postId) REFERENCES dbo.Post(id)
+
+ALTER TABLE dbo.Comment
+ADD FOREIGN KEY (userId) REFERENCES dbo.Users(id)
+
+ALTER TABLE dbo.Message
+ADD FOREIGN KEY (senderId) REFERENCES dbo.Users(id)
+
+ALTER TABLE dbo.Message
+ADD FOREIGN KEY (receiverId) REFERENCES dbo.Users(id)
+
+--NOTIFICATIONS
+
+--pola ogólne
+
+sourceUserId int,
+sourceFirstName varchar(200),
+sourceLastName varc
+
+
+CREATE TABLE dbo.Notification(
+	id int identity(1,1) PRIMARY KEY,
+	ownerId int,
+	sourceUserId int,
+	sourceUserSrc varchar(150),
+	sourceFirstName varchar(200),
+	sourceLastName varchar(150),
+	isNewMessage bit,
+	isNewComment bit,
+	postId int NULL,
+	isNewInvite bit
+)
+
+
+CREATE TABLE dbo.Friends(
+	id int identity(1,1) PRIMARY KEY,
 	userId int,
-	place varchar(100),
-	date varchar(300)
+	invitedId int,
+	accepted bit
 )
 

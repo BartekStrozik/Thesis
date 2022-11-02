@@ -1,21 +1,10 @@
-<!--div class="container">
-    <div class="label">
-        <span></span>
-        <span class="time-stamp">
-            {{ timeStamp | date:'yyyy:mm:dd hh:mm' }}
-        </span>
-    </div>
-    <div class="content">
-        {{ content }}
-    </div>
-</div-->
 <div class="line" [ngClass]="{'from-sender':isOwn}">
     <div class="container" [ngClass]="{'isOwnMessageContainer':isOwn}">
         <div class="label" [ngClass]="{'isOwnMessageData':isOwn}">
             <span class="sender" [ngClass]="{'isOwnSender':isOwn}">
             </span>
             <span class="time-stamp" [ngClass]="{'isOwnTimestamp':isOwn}">
-                {{ timeStamp | date:'yyyy:mm:dd hh:mm' }}
+                {{ timeStamp | date:'medium' }}
             </span>
         </div>
         <div class="content" [ngClass]="{'isOwnMessageContent':isOwn}">

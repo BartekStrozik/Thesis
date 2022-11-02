@@ -38,6 +38,50 @@ namespace CoreWebApp.Controllers
             return (xmlstr);
         }
 
+        public JToken GetUserData(int userId)
+        {
+            try
+            {
+                string query = @"
+                    SELECT firstName, lastName, src
+                    FROM dbo.Users
+                    WHERE id = '" + userId + @"'
+                ";
+                DataTable table = new DataTable();
+                table.TableName = "Users";
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
+
+                JToken userData = CoreWebApp.Utils.DataConverter.Convert(table);
+                return userData["Users"];
+            }
+            catch (Exception ex)
+            {
+                return "{}";//BadRequest(ex.Message); // this can be something like 
+            }
+        }
+
+        public JToken GetPostOwner(int postId)
+        {
+            try
+            {
+                string query = @"
+                    SELECT userId
+                    FROM dbo.Post
+                    WHERE id = '" + postId + @"'
+                ";
+                DataTable table = new DataTable();
+                table.TableName = "Post";
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
+
+                JToken data = CoreWebApp.Utils.DataConverter.Convert(table);
+                return data["Post"];
+            }
+            catch (Exception ex)
+            {
+                return "{}";//BadRequest(ex.Message); // this can be something like 
+            }
+        }
+
         // GET: Comment/id
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
@@ -135,6 +179,27 @@ namespace CoreWebApp.Controllers
 
                 DataTable table = new DataTable();
                 table.TableName = "Comment";
+                CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
+
+                JToken user = this.GetUserData(comment.userId);
+                JToken ownerId = this.GetPostOwner(comment.postId);
+
+                query = @"
+                            INSERT INTO dbo.Notification 
+                            (ownerId, sourceUserId, sourceUserSrc, sourceFirstName, sourceLastName, isNewMessage, isNewComment, postId, isNewInvite) VALUES
+                            ('" + ownerId["userId"] + @"',
+                            '" + comment.userId + @"',
+                            '" + user["src"] + @"',
+                            '" + user["firstName"] + @"',
+                            '" + user["lastName"] + @"',
+                            '" + 0 + @"',
+                            '" + 1 + @"',
+                            '" + comment.postId + @"',
+                            '" + 0 + @"')
+                        ";
+
+                table = new DataTable();
+                table.TableName = "Notification";
                 CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
                 var message = "Added!!";

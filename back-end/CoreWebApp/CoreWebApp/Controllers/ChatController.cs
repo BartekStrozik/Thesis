@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CoreWebApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -72,6 +73,27 @@ namespace CoreWebApp.Controllers
             return result;
         }
 
+        public JToken GetUserData(int userId)
+        {
+            try
+            {
+                string query = @"
+                    SELECT firstName, lastName, src
+                    FROM dbo.Users
+                    WHERE id = '" + userId + @"'
+                ";
+                DataTable table = new DataTable();
+                table.TableName = "Users";
+                table = CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
+
+                JToken userData = CoreWebApp.Utils.DataConverter.Convert(table);
+                return userData["Users"];
+            }
+            catch (Exception ex)
+            {
+                return "{}";//BadRequest(ex.Message); // this can be something like 
+            }
+        }
 
         [HttpGet("/gt")]
         public async Task Get()
@@ -265,22 +287,9 @@ namespace CoreWebApp.Controllers
 
             DataTable table = new DataTable();
             table.TableName = "Message";
-            using (var con = new SqlConnection(this.connectionString))
-            using (var cmd = new SqlCommand(query, con))
-            using (var da = new SqlDataAdapter(cmd))
-            {
-                cmd.CommandType = CommandType.Text;
-                da.Fill(table);
-            }
+            CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
 
-            var xmlStr = ConvertDatatableToXML(table);
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xmlStr);
-            string jsonText = JsonConvert.SerializeXmlNode(doc);
-
-            JObject data = JObject.Parse(jsonText);
-            JToken docElement = data["DocumentElement"];
+            JToken docElement = CoreWebApp.Utils.DataConverter.Convert(table);
 
             string result = "";
 
@@ -296,8 +305,6 @@ namespace CoreWebApp.Controllers
             {
                 result = "[]";
             }
-
-            //string result = docElement["Message"].ToString();
 
             ArraySegment<byte> myArrSegAll = new ArraySegment<byte>(Encoding.UTF8.GetBytes(result));
 
@@ -322,7 +329,7 @@ namespace CoreWebApp.Controllers
 
         }
 
-        [HttpGet("/pt")]
+        [HttpGet("/snd")]
         public async Task SendMessage()
         {
             if (HttpContext.WebSockets.IsWebSocketRequest)
@@ -359,11 +366,6 @@ namespace CoreWebApp.Controllers
                         receiveResult.EndOfMessage,
                         CancellationToken.None);
 
-                    //int to = this.GetUserId(request["to"].ToString());
-                    //string content = request["content"].ToString();
-                    //int from = LoginController.getClaim(request["token"].ToString());
-                    //string date = DateTime.Now.ToString();
-
                     int senderId = Int32.Parse(request["userId"].ToString());
                     int receiverId = Int32.Parse(request["interlocatorId"].ToString());
                     string content = request["content"].ToString();
@@ -382,13 +384,26 @@ namespace CoreWebApp.Controllers
 
                         DataTable table = new DataTable();
                         table.TableName = "Message";
-                        using (var con = new SqlConnection(this.connectionString))
-                        using (var cmd = new SqlCommand(query, con))
-                        using (var da = new SqlDataAdapter(cmd))
-                        {
-                            cmd.CommandType = CommandType.Text;
-                            da.Fill(table);
-                        }
+                        CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
+
+                        JToken user = this.GetUserData(senderId);
+
+                        query = @"
+                            INSERT INTO dbo.Notification VALUES
+                            ('" + receiverId + @"',
+                            '" + senderId + @"',
+                            '" + user["src"] + @"',
+                            '" + user["firstName"] + @"',
+                            '" + user["lastName"] + @"',
+                            '" + 1 + @"',
+                            '" + 0 + @"',
+                            '" + null + @"',
+                            '" + 0 + @"')
+                        ";
+
+                        table = new DataTable();
+                        table.TableName = "Notification";
+                        CoreWebApp.Utils.QueryExecutor.ExecuteQuery(this.connectionString, table, query);
                     }
                     catch (Exception ex)
                     {

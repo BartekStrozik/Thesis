@@ -40,7 +40,7 @@ export class MessagesService {
   }
 
   sendMessage(userId: number, interlocatorId: number, content: string){
-    this.socket = new WebSocket('wss://localhost:44347/pt');
+    this.socket = new WebSocket('wss://localhost:44347/snd');
 
     this.authService.currentUser.subscribe(user => this.jwt = user);
     let token = this.jwt.token;

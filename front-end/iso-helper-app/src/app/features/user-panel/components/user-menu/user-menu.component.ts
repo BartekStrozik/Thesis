@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthenticationService } from '@core/authentication/services/authentication.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-menu.component.scss']
 })
 export class UserMenuComponent implements OnInit {
+  @Output() logoutClick: EventEmitter<string> = new EventEmitter();
 
-  constructor() { }
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.logoutClick.emit("");
   }
 
 }

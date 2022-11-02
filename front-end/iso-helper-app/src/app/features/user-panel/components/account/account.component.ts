@@ -16,8 +16,14 @@ export class AccountComponent implements OnInit {
     this.getUser();
   }
 
+  createImagePath(src: string){
+    return `https://localhost:44347/${src}`
+  }
+
   getUser() {
-    this.authService.currentUser.subscribe(user => this.currentUser = user);
+    this.authService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    })
   }
 
 }
